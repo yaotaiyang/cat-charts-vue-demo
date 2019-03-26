@@ -1,6 +1,6 @@
 <template>
 <div class="abc">
-  <s-chart :size="[600,600]">
+  <s-chart :size="[700,700]">
     <s-line :attrs="attrs" :data="lineData" :data-fields="dataFields" />
     <s-axis :attrs="{orient:'left'}" />
     <s-axis :attrs="{orient:'bottom'}" />
