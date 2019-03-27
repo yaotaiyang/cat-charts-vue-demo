@@ -37,6 +37,5 @@
 </script>
 <style>
 .abc{height:600px}
-.cat-charts{position:relative;height:100%;}
 </style>
 
