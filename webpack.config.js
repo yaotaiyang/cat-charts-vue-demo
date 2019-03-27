@@ -1,114 +1,68 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require("path");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var VueLoaderPlugin = require("vue-loader/lib/plugin");
+const webpack = require("webpack");
 
-module.exports = {
-  entry: './src/main.js',
+var config = {
+  entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    path: path.resolve(__dirname + "/dist"), //打包生成文件地址
+    filename: "[name].build.js", //生成文件ming
+    publicPath: "/dist/" //文件输出的公共路径
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: "/.js$/",
         use: [
-          'vue-style-loader',
-          'css-loader'
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ],
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader?indentedSyntax'
-        ],
-      },
-
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader'
-            ],
-            'sass': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader?indentedSyntax'
-            ]
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["env"]
+            }
           }
-          // other vue-loader options go here
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        ],
+        include: path.resolve(__dirname + "/src/"),
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        include: path.resolve(__dirname + "/src/"),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        use: "url-loader",
+        include: path.resolve(__dirname + "/src/"),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
       }
     ]
   },
   resolve: {
+    extensions: [".js", ".jsx", ".json", ".css"],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: "vue/dist/vue.esm.js"
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    modules: ["node_modules"]
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true
-  },
-  performance: {
-    hints: false
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html",
+      chunks: ["main"]
+    }),
+    new VueLoaderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   externals: {
-    vue: 'Vue',
-    spritejs: 'spritejs',
-    'cat-charts': 'CatCharts',
-  },
-  devtool: '#eval-source-map'
-}
+    vue: "Vue",
+    spritejs: "spritejs",
+    "cat-charts": "CatCharts"
+  }
+};
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
-}
+module.exports = config;
