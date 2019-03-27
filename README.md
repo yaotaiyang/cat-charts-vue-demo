@@ -9,3 +9,5 @@ npm install
 ```
 npm run dev
 ```
+
+浏览器会自动打开
