@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {install} from 'cat-charts'
-Vue.use(install)
+import * as CatCharts from 'cat-charts'
+Vue.use(CatCharts)
 
 new Vue({
   el: '#app',
