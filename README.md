@@ -1,2 +1,2 @@
 # cat-charts-demo
-CatCharts demo
+CatCharts quickstart
