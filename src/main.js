@@ -1,9 +1,8 @@
-import Vue from 'vue'
-import App from './App.vue'
-import * as CatCharts from 'cat-charts'
-Vue.use(CatCharts)
+import Vue from "vue";
+import App from "./App.vue";
 
+Vue.use(CatChartsVue);
 new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+  el: "#app",
+  render: (h) => h(App)
+});
