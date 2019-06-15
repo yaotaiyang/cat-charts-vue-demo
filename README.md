@@ -1,7 +1,7 @@
 # cat-charts-demo
-CatCharts quickstart
+CatChartsVue quickstart
 
-详细文档→ <a target="_blank" href="https://www.spritejs.com/catcharts/">CatCharts</a> 
+详细文档→ <a target="_blank" href="https://www.spritejs.com/cat-charts-vue/">CatCharts</a> 
 
 ### 安装
 ```
