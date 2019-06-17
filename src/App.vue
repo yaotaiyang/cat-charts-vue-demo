@@ -27,7 +27,7 @@ export default {
         { date: "05-08", catgory: "图例一", sales: 65.2 }
       ],
       tooltipAttrs: {
-        formatter: data => `${data.city}-${data.month}-${data.value}`
+        formatter: data => `${data.date}-${data.catgory}-${data.sales}`
       },
       dataFields: {
         row: "catgory",
